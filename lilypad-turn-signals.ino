@@ -16,18 +16,17 @@ int rightSwitchLow = 16;
 int leftSwitchLow = 3;
 
 
-
-void setup() {  
+void setup() {
   pinMode(rightIndicator, OUTPUT);
   pinMode(leftIndicator, OUTPUT);
-  
+
   pinMode(rightSignal, OUTPUT);
   pinMode(leftSignal, OUTPUT);
-  
+
   setupGroundPin(signalLow);
   setupGroundPin(leftSwitchLow);
   setupGroundPin(rightSwitchLow);
-  
+
   setupSwitch(leftSwitch);
   setupSwitch(rightSwitch);
 
@@ -63,11 +62,11 @@ void indicateOn() {
   digitalWrite(leftIndicator, HIGH);
   delay (1);
   digitalWrite(leftIndicator, LOW);
-  
+
   digitalWrite(rightIndicator, HIGH);
   delay(1);
   digitalWrite(rightIndicator, LOW);
-  
+
   digitalWrite(boardLED, HIGH);
   delay (8);
   digitalWrite(boardLED, LOW);
@@ -83,7 +82,7 @@ bool onButtonUp(int pin) {
 
     return true;
   }
-  
+
   return false;
 }
 
@@ -99,13 +98,13 @@ void runSignal(int signalPin, int indicatorPin, int switchPin, int times) {
 // true = button was pressed, false = not pressed
 bool setAndListen(int signalPin, int indicatorPin, int value, int switchPin, int times) {
   int i;
-  
+
   digitalWrite(signalPin, value);
   digitalWrite(indicatorPin, !value);
   for (i = 0; i < times; ++i) {
     delay(50);
     if (onButtonUp(switchPin)) return true;
   }
-  
+
   return false;
 }
